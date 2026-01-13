@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Age Calculator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+
+<style>
+*{ box-sizing:border-box; }
+
+body{
+  margin:0;
+  font-family:Arial, sans-serif;
+  background:#eef1f7;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* 🔴 TOP STRIP */
+.top-strip{
+  width:100%;
+  padding:14px 0;
+  text-align:center;
+  background:linear-gradient(90deg,#ff004c,#ff9f00,#8e2de2,#ff004c);
+  background-size:600% 600%;
+  animation:stripMove 4s ease infinite;
+}
+@keyframes stripMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.top-strip span{
+  font-family:'Poppins',sans-serif;
+  font-size:22px;
+  font-weight:700;
+  letter-spacing:1.2px;
+  background:linear-gradient(90deg,#00f2fe,#ffffff,#4facfe,#00f2fe);
+  background-size:600% 600%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:textMove 4s ease infinite reverse;
+}
+@keyframes textMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+/* OWNER NAME */
+.owner-name{
+  margin:12px 0;
+  font-size:17px;
+  font-weight:bold;
+  background:linear-gradient(90deg,#ff0080,#7928ca,#2afadf,#ff0080);
+  background-size:600% 600%;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:ownerMove 5s ease infinite;
+}
+@keyframes ownerMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+/* 🔹 NAV STRIP */
+.nav-strip{
+  width:100%;
+  padding:10px 0;
+  text-align:center;
+  background:#ffffff;
+  box-shadow:0 4px 10px rgba(0,0,0,.1);
+}
+
+.nav-strip a{
+  text-decoration:none;
+  font-weight:600;
+  color:#333;
+  margin:0 6px;
+  font-size:14px;
+}
+
+.nav-strip a:hover{
+  color:#2193f3;
+}
+/* APP CARD */
+.app{
+  width:360px;
+  background:#fff;
+  border-radius:22px;
+  box-shadow:0 18px 35px rgba(0,0,0,.25);
+  overflow:hidden;
+}
+.topbar{
+  padding:18px;
+  text-align:center;
+  color:#fff;
+  background:linear-gradient(90deg,#2193f3,#00e5ff,#7b2ff7,#2193f3);
+  background-size:600% 600%;
+  animation:blueMove 4s ease infinite;
+}
+@keyframes blueMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+.brand{ font-size:20px; font-weight:bold; }
+.welcome{ font-size:12px; }
+
+.content{ padding:20px; }
+label{ font-size:14px; font-weight:bold; }
+input{
+  width:100%;
+  padding:11px;
+  margin-top:8px;
+  margin-bottom:15px;
+  font-size:14px;
+  border-radius:8px;
+  border:2px solid #ff9f00;
+}
+.result{
+  text-align:center;
+  font-size:14px;
+  font-weight:bold;
+  line-height:1.6;
+}
+.bottom{ padding:15px; }
+button{
+  width:100%;
+  padding:15px;
+  font-size:16px;
+  color:#fff;
+  border:none;
+  border-radius:14px;
+  background:linear-gradient(90deg,#2193f3,#00e5ff,#7b2ff7,#2193f3);
+  background-size:600% 600%;
+  animation:blueMove 4s ease infinite;
+}
+
+/* DISCLAIMER */
+.disclaimer{
+  max-width:360px;
+  font-size:11px;
+  color:#666;
+  text-align:center;
+  margin:10px 0;
+}
+
+/* 👤 CREATOR PROFILE */
+.creator{
+  width:360px;
+  text-align:center;
+  margin:25px 0 40px;
+}
+
+/* 🔥 DP GLOW */
+.dp-box{
+  width:90px;
+  height:90px;
+  margin:0 auto 10px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(45deg,#00f2fe,#4facfe,#7b2ff7,#ff0080);
+  background-size:400% 400%;
+  animation:glowRotate 6s ease infinite;
+}
+.dp-box img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+}
+@keyframes glowRotate{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.creator-name{
+  font-size:16px;
+  font-weight:bold;
+}
+.creator hr{
+  width:60%;
+  margin:10px auto;
+  border:1px solid #ccc;
+}
+.follow-text{
+  font-size:13px;
+  font-weight:bold;
+  margin-bottom:10px;
+}
+
+/* SOCIAL BUTTONS */
+.social{
+  display:flex;
+  gap:12px;
+  justify-content:center;
+}
+.social a{
+  flex:1;
+  max-width:140px;
+  padding:10px;
+  text-decoration:none;
+  color:#fff;
+  border-radius:8px;
+  font-weight:bold;
+}
+.yt{ background:#ff0000; }
+.ig{ background:linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4); }
+/* 🔻 FOOTER SECTION */
+.footer{
+  width:100%;
+  margin-top:30px;
+  padding:16px 10px;
+  text-align:center;
+  background:linear-gradient(90deg,#ff004c,#ff9f00,#8e2de2,#ff004c);
+  background-size:600% 600%;
+  animation:footerMove 4s ease infinite;
+}
+
+@keyframes footerMove{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+.footer a{
+  color:#ffffff;
+  font-size:14px;
+  font-weight:600;
+  margin:0 8px;
+  text-decoration:none;
+}
+
+.footer a:hover{
+  text-decoration:underline;
+}
+
+.footer .copy{
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  opacity:0.9;
+}
+</style>
+</head>
+
+<body>
+
+<div class="top-strip">
+  <span>WELCOME TO NIROJIT WEB</span>
+</div>
+<!-- 👇 YAHAN PASTE KARO -->
+<div class="nav-strip">
+  <a href="index.html">Home</a> |
+  <a href="about.html">About</a> |
+  <a href="privacy.html">Privacy</a> |
+  <a href="contact.html">Contact</a>
+</div>
+
+<div class="owner-name">Created by Nirojit Nath</div>
+
+<div class="app">
+  <div class="topbar">
+    <div class="brand">Smart Age Calculator</div>
+    <div class="welcome">Calculate your exact life time</div>
+  </div>
+
+  <div class="content">
+    <label>Select your Date & Time of Birth</label>
+    <input type="datetime-local" id="dob">
+    <div class="result" id="result"></div>
+  </div>
+
+  <div class="bottom">
+    <button onclick="start()">CALCULATE AGE</button>
+  </div>
+</div>
+
+<div class="disclaimer">
+⚠️ Results may vary slightly based on system time and timezone.
+</div>
+
+<!-- 👤 CREATOR -->
+<div class="creator">
+  <div class="dp-box">
+    <!-- YAHAN BASE64 IMAGE PASTE KARO -->
+    <img src="profile.jpg" alt="Nirojit Nath">
+  </div>
+
+  <div class="creator-name">Nirojit Nath</div>
+  <hr>
+  <div class="follow-text">FOLLOW / SUBSCRIBE US ON:</div>
+
+  <div class="social">
+    <a class="yt" href="https://youtube.com/@nathnirojit" target="_blank">YouTube</a>
+    <a class="ig" href="https://www.instagram.com/nathnirojit/" target="_blank">Instagram</a>
+  </div>
+</div>
+<!-- 🔻 FOOTER -->
+<div class="footer">
+  <a href="privacy.html">Privacy Policy</a> |
+  <a href="about.html">About</a> |
+  <a href="contact.html">Contact</a>
+
+  <span class="copy">
+    © 2026 Nirojit Web. All rights reserved.
+  </span>
+</div>
+<script>
+let timer;
+function start(){
+  clearInterval(timer);
+  calculate();
+  timer=setInterval(calculate,1000);
+}
+function calculate(){
+  let dob=document.getElementById("dob").value;
+  let result=document.getElementById("result");
+  if(!dob){ result.innerHTML="Please select date & time"; return; }
+
+  let diff=new Date()-new Date(dob);
+  if(diff<0){ result.innerHTML="Invalid birth time"; return; }
+
+  let s=Math.floor(diff/1000);
+  let sec=s%60;
+  let min=Math.floor(s/60)%60;
+  let hr=Math.floor(s/3600)%24;
+  let days=Math.floor(s/86400);
+  let yrs=Math.floor(days/365.25);
+  let mon=Math.floor((days%365.25)/30.44);
+  let d=Math.floor((days%365.25)%30.44);
+
+  result.innerHTML=
+  "⏳ Your Exact Age<br><br>"+
+  yrs+" Years<br>"+mon+" Months<br>"+d+" Days<br>"+
+  hr+" Hours<br>"+min+" Minutes<br>"+sec+" Seconds";
+}
+</script>
+
+</body>
+</html>
