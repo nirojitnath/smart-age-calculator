@@ -253,9 +253,15 @@ function calculate(){
   `;
 }
 
+// Updated Share Function with professional link and attractive text
 function shareWhatsApp() {
-  const url = window.location.href;
-  const text = "Check out this Smart Age Calculator by Nirojit Nath! 🎂\n" + url;
+  const cleanUrl = "https://nirojitnath.github.io/smart-age-calculator/";
+  const text = 
+    "✨ *Smart Age Calculator* ✨\n\n" +
+    "Apni exact age (Years, Months, Days aur Seconds) mein jaaniye sirf ek click mein! 🎂\n\n" +
+    "Check it out here: \n" + cleanUrl + "\n\n" +
+    "Created by *Nirojit Nath* 🚀";
+
   window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text), "_blank");
 }
 
