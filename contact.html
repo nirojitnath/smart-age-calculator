@@ -81,7 +81,16 @@ body{
   padding:25px;
 }
 
-h1{ text-align:center; font-size:24px; color:#2193f3; margin-top:0; }
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #2193f3;
+  margin-top: 0;
+  margin-bottom: 20px; /* Thoda gap badhane ke liye */
+  padding-bottom: 10px; /* Text aur line ke beech jagah */
+  border-bottom: 2px solid currentColor; /* Matching blue line */
+  display: block; /* Poori width cover karne ke liye */
+}
 p{ font-size:14px; line-height:1.7; color:#444; margin-bottom:15px; }
 
 /* CONTACT BOX */
@@ -91,7 +100,12 @@ p{ font-size:14px; line-height:1.7; color:#444; margin-bottom:15px; }
   border-radius:12px;
   background:#f7f7f7;
 }
+
 .contact-box a{ color:#2193f3; text-decoration: none; font-weight: bold; }
+
+body.dark .contact-box a{
+  color:#00e5ff;
+}
 
 /* DARK MODE */
 body.dark{ background:#121212; color:#eee; }
@@ -109,12 +123,55 @@ body.dark .contact-box { background:#2a2a2a; color:#eee; }
   background-size:600% 600%; animation:stripMove 4s ease infinite;
   margin-top: auto;
 }
+/* Text transition ke liye naya CSS */
+#dynamicText {
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+}
+.fade-out {
+  opacity: 0;
+}
+/* Animated Back to Home Button */
+.back-btn-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.back-home-btn {
+  display: inline-block;
+  padding: 14px 30px;
+  /* Footer aur Top Strip jaisa gradient */
+  background: linear-gradient(90deg, #ff004c, #ff9f00, #8e2de2, #ff004c);
+  background-size: 600% 600%;
+  animation: stripMove 4s ease infinite; /* Existing animation use ho rahi hai */
+  
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-home-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Dark Mode adjustment - Text color ko handle karne ke liye */
+body.dark .back-home-btn {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
 </style>
 </head>
 
 <body>
 
-<div class="top-strip"><span>WELCOME TO NIROJIT WEB</span></div>
+<div class="top-strip">
+  <span id="dynamicText">Smart Age Calculator</span>
+</div>
+
 
 <div class="nav-strip">
   <div class="nav-left"><span class="menu-icon" id="menuBtn" onclick="toggleMenu()">☰</span></div>
@@ -122,30 +179,34 @@ body.dark .contact-box { background:#2a2a2a; color:#eee; }
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
+  <a href="./">Home</a>
   <a href="about.html">About Us</a>
   <a href="privacy.html">Privacy Policy</a>
   <a href="contact.html">Contact Us</a>
 </div>
 
-<div class="owner-name">Created by Nirojit Nath</div>
+<div class="owner-name">Created by Nirojit Editx 01</div>
 
 <div class="container">
   <h1>Contact Us</h1>
   <p>If you have any questions, suggestions, feedback, or business inquiries, feel free to contact us.</p>
 
   <div class="contact-box">
-    <p><strong>Nirojit Web</strong></p>
-    <p><strong>Email:</strong> <a href="mailto:nirojitnath36@email.com">nirojitnath36@email.com</a></p>
-    <p><strong>YouTube:</strong> <a href="https://youtube.com/@nathnirojit" target="_blank">Nirojit Editx 01</a></p>
-    <p><strong>Instagram:</strong> <a href="https://instagram.com/nathnirojit" target="_blank">@nathnirojit</a></p>
+    <p><strong>Nirojit Editx 01</strong></p>
+    <p><strong>Email:</strong> <a href="mailto:nirojitnath36@email.com">Click here.</a></p>
+    <p><strong>YouTube:</strong> <a href="https://youtube.com/@nathnirojit" target="_blank">Click here.</a></p>
+    <p><strong>Instagram:</strong> <a href="https://instagram.com/nathnirojit" target="_blank">Click here.</a></p>
   </div>
 
-  <p style="margin-top:15px; text-align: center;">We try to respond as soon as possible. Thank you for visiting Nirojit Web.</p>
+  <p style="margin-top:15px; text-align: center;">We try to respond as soon as possible. Thank you for using Smart Age Calculator.</p>
+</div>
+
+<div class="back-btn-container">
+  <a href="./" class="back-home-btn">← Back to Home</a>
 </div>
 
 <div class="footer">
-  <span style="font-size:12px; opacity:0.9;">© 2026 Nirojit Web. All Rights Reserved.</span>
+  <span style="font-size:12px; opacity:0.9;">© 2026 Nirojit Editx 01. All Rights Reserved.</span>
 </div>
 
 <script>
@@ -174,6 +235,30 @@ window.onload = () => {
     document.getElementById("themeIcon").innerHTML = "🌙";
   }
 };
+// Dynamic text loop logic
+const textArray = [
+  "Nirojit Editx 01",
+  "Exact Age Calculator",
+  "Date to Date Difference",
+  "Birthday Countdown",
+  "Live Age Calculate"
+];
+
+let textIdx = 0;
+const textEl = document.getElementById("dynamicText");
+
+function rotateText() {
+  textEl.classList.add("fade-out"); // Text ko dhundhla karein
+  setTimeout(() => {
+    textIdx = (textIdx + 1) % textArray.length;
+    textEl.innerText = textArray[textIdx];
+    textEl.classList.remove("fade-out"); // Naya text dikhayein
+  }, 500);
+}
+
+// Har 3 second mein badlega
+setInterval(rotateText, 3000);
+
 </script>
 
 </body>
