@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Us - Nirojit Web</title>
+<title>About Us - Smart Age Calculator</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 
@@ -80,12 +80,23 @@ body{
   padding:25px;
 }
 
-h1{
-  text-align:center;
-  font-size:24px;
-  color:#2193f3;
-  margin-top:0;
+h1 {
+  text-align: center;
+  font-size: 24px;
+  color: #2193f3;
+  margin-top: 0;
+  margin-bottom: 20px; /* Thoda gap badhane ke liye */
+  padding-bottom: 10px; /* Text aur line ke beech jagah */
+  border-bottom: 2px solid #2193f3; /* Matching blue line */
+  display: block; /* Poori width cover karne ke liye */
 }
+
+/* Dark mode ke liye line ka color change karein */
+body.dark h1 {
+  color: #00e5ff;
+  border-bottom-color: #00e5ff;
+}
+
 
 p{
   font-size:14px;
@@ -109,12 +120,56 @@ body.dark .toggle-ball { transform: translateX(24px); background:#2193f3; }
   background-size:600% 600%; animation:stripMove 4s ease infinite;
   margin-top: auto;
 }
+/* Text transition ke liye naya CSS */
+#dynamicText {
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+}
+.fade-out {
+  opacity: 0;
+}
+/* Animated Back to Home Button */
+.back-btn-container {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.back-home-btn {
+  display: inline-block;
+  padding: 14px 30px;
+  /* Footer aur Top Strip jaisa gradient */
+  background: linear-gradient(90deg, #ff004c, #ff9f00, #8e2de2, #ff004c);
+  background-size: 600% 600%;
+  animation: stripMove 4s ease infinite; /* Existing animation use ho rahi hai */
+  
+  color: white;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 16px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s;
+  font-family: 'Poppins', sans-serif;
+}
+
+.back-home-btn:hover {
+  transform: scale(1.05);
+}
+
+/* Dark Mode adjustment - Text color ko handle karne ke liye */
+body.dark .back-home-btn {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="top-strip"><span>WELCOME TO NIROJIT WEB</span></div>
+<div class="top-strip">
+  <span id="dynamicText">Smart Age Calculator</span>
+</div>
+
 
 <div class="nav-strip">
   <div class="nav-left"><span class="menu-icon" id="menuBtn" onclick="toggleMenu()">☰</span></div>
@@ -122,41 +177,41 @@ body.dark .toggle-ball { transform: translateX(24px); background:#2193f3; }
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
+  <a href="./">Home</a>
   <a href="about.html">About Us</a>
   <a href="privacy.html">Privacy Policy</a>
   <a href="contact.html">Contact Us</a>
 </div>
 
-<div class="owner-name">Created by Nirojit Nath</div>
+<div class="owner-name">Created by Nirojit Editx 01</div>
 
 <div class="container">
   <h1>About Us</h1>
 
   <p>
-    Welcome to <strong>Nirojit Web</strong>.  
-    We are dedicated to creating simple, useful, and user-friendly web tools that help people
-    in their daily life.
+    Welcome to <strong>Smart Age Calculator</strong>, a simple, fast, and accurate online tool designed to help you calculate your exact age with ease.
   </p>
 
   <p>
-    Our <strong>Smart Age Calculator</strong> is designed to calculate your exact age in years, months, days,
-    hours, minutes, and seconds with precision.
+    Our tool allows you to find your precise age in years, months, days, hours, minutes, and seconds with live, second-by-second updates. It also includes useful features like birthday countdown and date-to-date difference calculation, making it perfect for everyday use.
   </p>
 
-  <p>
-    At Nirojit Web, we focus on clean design, fast performance, and mobile-friendly experience.
-    All calculations are performed directly in your browser for better privacy and speed.
-  </p>
-
-  <p>
-    This website is an official project of <strong>Nirojit Editx 01</strong>, created and maintained by <strong>Nirojit Nath</strong>.
-    Our goal is to provide free tools that are easy to use and accessible to everyone.
-  </p>
+<p>
+  At <strong>Smart Age Calculator</strong>, we focus on:<br>
+ • ⏳Exact & live age calculation<br>
+ • 🎂 Birthday countdown feature<br>
+ • 📅 Date-to-date difference calculator<br>
+ • 📱 Mobile-friendly & responsive design<br>
+ • 🔒 Privacy-focused (no data storage)</p>
+<p>All calculations are performed directly in your browser, ensuring better speed, security, and privacy. No sign-up or personal data is required.</p>
+<p>This website is an official project of <strong>Nirojit Editx 01</strong>, created and maintained by Nirojit. Our mission is to build free, reliable, and easy-to-use web tools that help users in their daily life.</p>
 
   <p style="text-align:center; font-weight:bold; color:#2193f3;">
-    Thank you for visiting!
+    Thank you for using Smart Age Calculator.
   </p>
+</div>
+<div class="back-btn-container">
+  <a href="./" class="back-home-btn">← Back to Home</a>
 </div>
 
 <div class="footer">
@@ -187,6 +242,30 @@ window.onload = () => {
     document.getElementById("themeIcon").innerHTML = "🌙";
   }
 };
+// Dynamic text loop logic
+const textArray = [
+  "Nirojit Editx 01",
+  "Exact Age Calculator",
+  "Date to Date Difference",
+  "Birthday Countdown",
+  "Live Age Calculate"
+];
+
+let textIdx = 0;
+const textEl = document.getElementById("dynamicText");
+
+function rotateText() {
+  textEl.classList.add("fade-out"); // Text ko dhundhla karein
+  setTimeout(() => {
+    textIdx = (textIdx + 1) % textArray.length;
+    textEl.innerText = textArray[textIdx];
+    textEl.classList.remove("fade-out"); // Naya text dikhayein
+  }, 500);
+}
+
+// Har 3 second mein badlega
+setInterval(rotateText, 3000);
+
 </script>
 
 </body>
