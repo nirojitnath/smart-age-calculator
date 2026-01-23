@@ -150,7 +150,21 @@ button.main-btn{
 .dp-box img{ width:80px; height:80px; border-radius:50%; object-fit:cover; }
 .creator-name{ font-weight: bold; }
 .social { display: flex; gap: 10px; justify-content: center; margin-top: 10px;}
-.social a { flex:1; max-width:120px; padding: 10px; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; }
+.social a { 
+  flex: 1; 
+  max-width: 140px; 
+  padding: 6px 4px; 
+  color: #fff; 
+  text-decoration: none; 
+  border-radius: 8px; 
+  font-weight: bold; 
+  font-size: 14px; /* Isse text chota ho jayega */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 38px;
+}
 .yt{ background: #ff0000; }
 .ig{ background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
 
@@ -619,7 +633,7 @@ function animateProfile(element) {
   }, 3000);
 }
 // YouTube aur Instagram ke liye looping text
-const ytVariants = ["YouTube", "200k+ Subs"];
+const ytVariants = ["YouTube", "200k+ Subscribers"];
 const igVariants = ["Instagram", "80k+ Followers"];
 
 let ytIdx = 0;
