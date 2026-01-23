@@ -2,15 +2,19 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="description" content="Smart Age Calculator by Nirojit Nath. Calculate your exact age in years, months, days, hours, minutes and seconds. Official website of Nirojit Web and Nirojit Editx 01.">
-<meta name="keywords" content="Nirojit Nath, Nirojit Web, Smart Age Calculator, Age Calculator Online">
-<meta name="author" content="Nirojit Nath">
+<meta name="description" content="Calculate your exact age in years, months, days, and seconds with Smart Age Calculator. Features include Live Age tracking, Birthday Countdown, and Date Difference. Official project of Nirojit Editx 01.">
+<meta name="keywords" content="Smart Age Calculator, Age Calculator Online, Nirojit Editx 01, Age Calculator, Date Calculator, Birthday Calculator, Date to Date Difference, Birthday countdown, Nirojit Age Calculator, Nirojit Nath, Best Age Calculator 2026, Live Age Calculator">
+<meta name="author" content="Nirojit Editx 01">
 <meta name="robots" content="index, follow">
-<title>Smart Age Calculator - Calculate Exact Age | Nirojit Editx 01</title>
+<title>Smart Age Calculator</title>
+
+<link rel="canonical" href="https://nirojitnath.github.io/smart-age-calculator/">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <link rel="icon" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 *{ box-sizing:border-box; transition: background 0.3s, color 0.3s; }
@@ -25,7 +29,6 @@ body{
   align-items:center;
 }
 
-/* ANIMATIONS */
 @keyframes stripMove{
   0%{background-position:0% 50%}
   50%{background-position:100% 50%}
@@ -51,7 +54,6 @@ body{
   -webkit-text-fill-color:transparent; animation:stripMove 5s ease infinite;
 }
 
-/* NAV & MENU */
 .nav-strip{
   width:100%; padding:10px 20px; display:flex; align-items:center;
   justify-content:space-between; background:#ffffff; box-shadow:0 4px 10px rgba(0,0,0,.1);
@@ -64,7 +66,30 @@ body{
 }
 .mobile-menu a { padding: 15px; text-decoration: none; color: #333; font-weight:600; border-bottom: 1px solid #eee; }
 
-/* TOGGLE */
+/* HOW TO USE */
+.how-to-link-container {
+  width: 100%; max-width: 360px; padding: 5px 10px; display: flex; align-items: center; cursor: pointer; justify-content: flex-start;
+}
+.info-circle {
+  width: 13px; height: 13px; border-radius: 50%; border: 1.2px solid #333; display: flex; align-items: center; justify-content: center; font-size: 9px; font-weight: bold; margin-right: 4px; color: #333;
+}
+.how-to-text { font-weight: bold; color: #ff9f00; text-decoration: underline; font-size: 11px; }
+
+/* MODAL / POPUP */
+.modal-overlay {
+  display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 9999; justify-content: center; align-items: center;
+}
+.modal-box {
+  background: #fff; width: 92%; max-width: 400px; max-height: 85vh; padding: 25px; border-radius: 20px; overflow-y: auto; box-shadow: 0 15px 30px rgba(0,0,0,0.4);
+}
+body.dark .modal-box { background: #1e1e1e; color: #eee; }
+.modal-box h3 { color: #25D366; margin: 0 0 15px 0; text-align: center; font-size: 20px; }
+.lang-subtitle { background: #f0f0f0; padding: 5px 12px; border-radius: 5px; font-size: 12px; font-weight: bold; color: #555; margin-top: 15px; display: inline-block; }
+body.dark .lang-subtitle { background: #333; color: #bbb; }
+.modal-box ol { padding-left: 20px; font-size: 13px; line-height: 1.6; margin-top: 10px; margin-bottom: 15px; }
+.close-modal-btn { width: 100%; padding: 14px; background: #25D366; color: #fff; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; margin-top: 10px; font-size: 15px; }
+
+/* THEME TOGGLE */
 .theme-toggle{ width:50px; height:26px; background:#ddd; border-radius:20px; cursor:pointer; position: relative; }
 .toggle-ball{
   position: absolute; top: 3px; left: 3px; width: 20px; height: 20px;
@@ -80,33 +105,39 @@ body{
   background-size:600% 600%; animation:stripMove 4s ease infinite;
 }
 .brand{ font-size:20px; font-weight:bold; }
-.content{ padding:20px; }
-input{ width:100%; padding:12px; margin-top:10px; margin-bottom:15px; border-radius:8px; border:2px solid #ff9f00; outline:none; }
-.result{ text-align:center; font-size:15px; font-weight:bold; line-height:1.8; color:#333; }
+.welcome{ font-size: 14px; opacity: 0.9; }
+
+/* TABS */
+.tab-container {
+  display: flex; background: #f1f3f6; padding: 4px; margin: 10px 15px; border-radius: 12px;
+}
+body.dark .tab-container { background: #333; }
+.tab-btn {
+  flex: 1; padding: 8px; border: none; background: transparent; font-size: 12px; font-weight: bold; color: #777; cursor: pointer; border-radius: 10px;
+}
+.tab-btn.active {
+  color: #fff; background: linear-gradient(90deg,#2193f3,#00e5ff,#7b2ff7,#2193f3);
+  background-size: 600% 600%; animation: stripMove 4s ease infinite;
+}
+
+.content{ padding:15px 20px; }
+input{ width:100%; padding:12px; margin-top:8px; margin-bottom:10px; border-radius:8px; border:2px solid #ff9f00; outline:none; }
+.result{ text-align:center; font-size:15px; font-weight:bold; line-height:1.6; color:#333; margin: 5px 0; }
 .bottom{ padding: 0 20px 20px 20px; }
-button{
+button.main-btn{
   width:100%; padding:15px; font-size:16px; color:#fff; border:none; border-radius:14px; cursor:pointer;
   background:linear-gradient(90deg,#2193f3,#00e5ff,#7b2ff7,#2193f3);
   background-size:600% 600%; animation:stripMove 4s ease infinite;
 }
 
-/* SHARE BOX SECTION */
+.system-notice { width: 340px; margin: 15px auto 5px; font-size: 11px; color: #777; text-align: center; line-height: 1.4; }
+
+/* SHARE ON WHATSAPP BUTTON */
 .share-container { width: 360px; text-align: center; margin-top: 10px; }
 .share-container p { font-size: 13px; font-weight: bold; color: #555; margin-bottom: 8px; }
 .whatsapp-btn {
-  background: #25D366; color: white; border: none; padding: 10px 20px; 
-  border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 14px;
-  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.3);
-}
-
-/* NEW NOTICE TEXT STYLING */
-.system-notice {
-  width: 340px;
-  margin: 15px auto 5px;
-  font-size: 11px;
-  color: #777;
-  text-align: center;
-  line-height: 1.4;
+  width: 95%; background: #25D366; color: white; border: none; padding: 12px; 
+  border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 15px;
 }
 
 /* CREATOR & SOCIAL */
@@ -117,18 +148,19 @@ button{
   background-size:400% 400%; animation:stripMove 6s ease infinite;
 }
 .dp-box img{ width:80px; height:80px; border-radius:50%; object-fit:cover; }
+.creator-name{ font-weight: bold; }
 .social { display: flex; gap: 10px; justify-content: center; margin-top: 10px;}
 .social a { flex:1; max-width:120px; padding: 10px; color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; }
 .yt{ background: #ff0000; }
 .ig{ background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
 
-/* FOOTER */
+/* FOOTER SECTION */
 .footer{
   width:100%; padding:20px; text-align:center; color:#fff;
   background:linear-gradient(90deg,#ff004c,#ff9f00,#8e2de2,#ff004c);
   background-size:600% 600%; animation:stripMove 4s ease infinite;
 }
-.footer-desc { font-size:13px; margin:15px auto; max-width:600px; opacity:0.9; line-height:1.6; }
+.footer-desc { font-size:13px; margin:5px auto; max-width:600px; opacity:0.9; line-height:1.7; }
 .footer a { color:#fff; text-decoration:none; font-weight:bold; margin:0 5px; }
 
 /* DARK MODE */
@@ -139,12 +171,89 @@ body.dark input { background:#333; color:#fff; border-color:#555; }
 body.dark .result { color:#fff; }
 body.dark .toggle-ball { transform: translateX(24px); background:#2193f3; }
 body.dark .share-container p, body.dark .system-notice { color: #bbb; }
+body.dark .info-circle { border-color: #eee; color: #eee; }
+/* Style for the verified badge */
+.creator-name {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Space between name and badge */
+  font-size: 18px; /* Adjust as needed */
+}
+
+.verified-badge {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+/* Text transition ke liye naya CSS */
+#dynamicText {
+  display: inline-block;
+  transition: opacity 0.5s ease-in-out;
+}
+.fade-out {
+  opacity: 0;
+}
+/* Container perspective */
+.dp-box { perspective: 1000px; }
+
+.dp-box img {
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.coin-flip-anim {
+  animation: coinFlipVertical 3s ease-in-out forwards; /* Total time badha diya pause ke liye */
+  z-index: 1000;
+  position: relative;
+}
+
+@keyframes coinFlipVertical {
+  0% { transform: scale(1) rotateX(0deg); }
+  40% { transform: scale(2.5) rotateX(360deg); } /* Bada aur flip hua */
+  40% { transform: scale(2.5) rotateX(360deg); } /* 20% se 70% tak pause rahega (approx 2 sec) */
+  100% { transform: scale(1) rotateX(720deg); } /* Wapas chota aur ek aur flip */
+}
+#ytText, #igText {
+  display: inline-block;
+  transition: opacity 0.4s ease-in-out;
+}
+.fade-out {
+  opacity: 0;
+}
+/* Light Mode (Default) mein tick black rahega */
+:root {
+  --tick-color: #000000; 
+}
+
+/* Dark Mode mein tick white ho jayega */
+body.dark {
+  --tick-color: #ffffff;
+}
+
+.verified-badge {
+  width: 18px;
+  height: 18px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* SVG ke path ka color variable se control hoga */
+.verified-badge path {
+  fill: var(--tick-color);
+  transition: fill 0.3s ease;
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="top-strip"><span>WELCOME TO NIROJIT WEB</span></div>
+<div class="top-strip">
+  <span id="dynamicText">Smart Age Calculator</span>
+</div>
+
 
 <div class="nav-strip">
   <div class="nav-left"><span class="menu-icon" id="menuBtn" onclick="toggleMenu()">☰</span></div>
@@ -152,25 +261,87 @@ body.dark .share-container p, body.dark .system-notice { color: #bbb; }
 </div>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html">Home</a>
+  <a href="./">Home</a>
   <a href="about.html">About Us</a>
   <a href="privacy.html">Privacy Policy</a>
   <a href="contact.html">Contact Us</a>
 </div>
 
-<div class="owner-name">Created by Nirojit Nath</div>
+<div class="how-to-link-container" onclick="openModal()">
+  <div class="info-circle">?</div>
+  <div class="how-to-text">How To Use?</div>
+</div>
+
+<div class="modal-overlay" id="howToModal">
+  <div class="modal-box">
+    <h3>📖 Complete User Guide</h3>
+    
+    <div class="lang-subtitle">English Instructions</div>
+    <div style="text-align: left; margin-top: 10px;">
+      <p style="font-size: 13px; font-weight: bold; color: #2193f3; margin-bottom: 2px;">🔹 Age Calculator</p>
+      <ol>
+        <li>Select <b>Age Calculator</b> tab.</li>
+        <li>Enter your <b>Date of Birth</b> in the box.</li>
+        <li>Click <b>CALCULATE AGE</b> for results & live countdown.</li>
+      </ol>
+      <p style="font-size: 13px; font-weight: bold; color: #2193f3; margin-bottom: 2px;">🔹 Date to Date</p>
+      <ol>
+        <li>Select <b>Date to Date</b> tab.</li>
+        <li>Enter <b>Start Date</b> and <b>End Date</b>.</li>
+        <li>Click <b>CALCULATE DIFFERENCE</b> to see the gap.</li>
+      </ol>
+    </div>
+
+    <hr style="opacity: 0.1; margin: 10px 0;">
+
+    <div class="lang-subtitle">हिंदी निर्देश</div>
+    <div style="text-align: left; margin-top: 10px;">
+      <p style="font-size: 13px; font-weight: bold; color: #ff9f00; margin-bottom: 2px;">🔹 उम्र कैसे देखें?</p>
+      <ol>
+        <li><b>Age Calculator</b> टैब चुनें।</li>
+        <li>अपनी <b>जन्म तिथि</b> भरें।</li>
+        <li><b>CALCULATE AGE</b> दबाएं और अपनी उम्र देखें।</li>
+      </ol>
+      <p style="font-size: 13px; font-weight: bold; color: #ff9f00; margin-bottom: 2px;">🔹 दो तारीखों का अंतर</p>
+      <ol>
+        <li><b>Date to Date</b> टैब चुनें।</li>
+        <li><b>शुरुआती</b> और <b>अंतिम</b> तारीख चुनें।</li>
+        <li><b>CALCULATE DIFFERENCE</b> दबाकर अंतर जानें।</li>
+      </ol>
+    </div>
+
+    <button class="close-modal-btn" onclick="closeModal()">Got it!</button>
+  </div>
+</div>
+
+<div class="owner-name">Created by Nirojit Editx 01</div>
 
 <div class="app">
   <div class="topbar">
-    <div class="brand">Smart Age Calculator</div>
-    <div class="welcome">Calculate your exact life time</div>
+    <div class="brand" id="mainTitle">Age, Birthday Calculator</div>
+    <div class="welcome" id="welcomeMsg">Calculate your exact life time</div>
   </div>
+
+  <div class="tab-container">
+    <button class="tab-btn active" id="ageTab" onclick="switchTab('age')">Age Calculator</button>
+    <button class="tab-btn" id="dateTab" onclick="switchTab('date')">Date to Date</button>
+  </div>
+
   <div class="content">
-    <label style="font-size: 13px; font-weight: bold;">Select Date & Time of Birth:</label>
-    <input type="datetime-local" id="dob">
+    <div id="startInput">
+      <label style="font-size: 12px; font-weight:bold;" id="startLabel">Select Date & Time of Birth:</label>
+      <input type="datetime-local" id="dob">
+    </div>
+
+    <div id="endInput" style="display: none;">
+      <label style="font-size: 12px; font-weight:bold;">Select End Date & Time:</label>
+      <input type="datetime-local" id="endDate">
+    </div>
+
     <div class="result" id="result">Your result will appear here...</div>
   </div>
-  <div class="bottom"><button onclick="start()">CALCULATE AGE</button></div>
+
+  <div class="bottom"><button class="main-btn" id="calcBtn" onclick="startTimer()">CALCULATE AGE</button></div>
 </div>
 
 <div class="system-notice">
@@ -183,29 +354,122 @@ body.dark .share-container p, body.dark .system-notice { color: #bbb; }
 </div>
 
 <div class="creator">
-  <div class="dp-box"><img src="profile.jpg" alt="Nirojit Nath"></div>
-  <div class="creator-name">Nirojit Nath</div>
+  <div class="dp-box">
+  <img src="profile.jpg" alt="Nirojit Editx 01" onclick="animateProfile(this)">
+</div>
+
+<div class="creator-name">
+  Nirojit Editx 01 
+  <svg class="verified-badge" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z" />
+
+  </svg>
+</div>
+
   <hr style="width:60%; margin:15px auto; opacity:0.3;">
-  <div style="font-size:12px; font-weight:bold; margin-bottom:10px;">FOLLOW / SUBSCRIBE US ON:</div>
+  <div style="font-size:12px; font-weight:bold; margin-bottom:10px;">SUBSCRIBE / FOLLOW US ON:</div>
   <div class="social">
-    <a class="yt" href="https://youtube.com/@nathnirojit" target="_blank">YouTube</a>
-    <a class="ig" href="https://instagram.com/nathnirojit" target="_blank">Instagram</a>
-  </div>
+  <a class="yt" href="https://youtube.com/@nathnirojit?si=CmjFfHvU7OkEh7u8" target="_blank">
+    <span id="ytText">YouTube</span>
+  </a>
+  <a class="ig" href="instagram.com/nathnirojit?igsh=aTVmNGdxMGI0bHV6" target="_blank">
+    <span id="igText">Instagram</span>
+  </a>
+</div>
 </div>
 
 <div class="footer">
-  <a href="privacy.html">Privacy Policy</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a>
-  <p class="footer-desc">
-    Smart Age Calculator is a professionally designed online tool developed by <strong>Nirojit Nath</strong>. 
-    It helps users accurately calculate age in years, months, days, and seconds. 
-    Official project of <strong>Nirojit Web</strong> and <strong>Nirojit Editx 01</strong>.
-  </p>
-  <span style="font-size:12px; opacity:0.8;">© 2026 Nirojit Web. All rights reserved.</span>
+  <div style="margin-bottom: 15px;">
+    <a href="privacy.html">Privacy Policy</a> | <a href="about.html">About Us</a> | <a href="contact.html">Contact Us</a>
+  </div>
+  
+  <div class="footer-desc" style="margin-bottom: 15px;">
+    Smart Age Calculator is a professionally designed online tool.<br>
+    Official project of <strong>Nirojit Editx 01</strong>.
+  </div>
+  
+  <div style="font-size:12px; opacity:0.8; margin-bottom: 5px;">
+    © 2026 <strong>Nirojit Editx 01</strong>. All rights reserved.
+  </div>
 </div>
+
 
 <script>
 let timer;
+let currentMode = 'age';
 let menuOpen = false;
+
+function resetResult() {
+  clearInterval(timer);
+  document.getElementById("result").innerHTML = "Your result will appear here...";
+}
+
+function setZeroTime(id) {
+  const el = document.getElementById(id);
+  el.addEventListener('click', resetResult);
+  el.addEventListener('input', resetResult);
+  el.addEventListener('change', function() {
+    if(this.value && !this.value.includes('T')) {
+      this.value = this.value + "T00:00";
+    } else if (this.value) {
+      let parts = this.value.split('T');
+      if (parts[1] === "" || !parts[1]) {
+        this.value = parts[0] + "T00:00";
+      }
+    }
+  });
+  el.addEventListener('focus', function() {
+    if(!this.value) {
+      let today = new Date().toISOString().split('T')[0];
+      this.value = today + "T00:00";
+    }
+  });
+}
+
+setZeroTime('dob');
+setZeroTime('endDate');
+
+function switchTab(mode) {
+  currentMode = mode;
+  resetResult();
+  const ageTab = document.getElementById("ageTab");
+  const dateTab = document.getElementById("dateTab");
+  const endInput = document.getElementById("endInput");
+  const startLabel = document.getElementById("startLabel");
+  const calcBtn = document.getElementById("calcBtn");
+  const welcomeMsg = document.getElementById("welcomeMsg");
+  // Get the title element
+  const mainTitle = document.getElementById("mainTitle");
+
+  if(mode === 'age') {
+    ageTab.classList.add("active");
+    dateTab.classList.remove("active");
+    endInput.style.display = "none";
+    startLabel.innerText = "Select Date & Time of Birth:";
+    calcBtn.innerText = "CALCULATE AGE";
+    welcomeMsg.innerText = "Calculate your exact life time";
+    // Change title for Age Mode
+    mainTitle.innerText = "Age, Birthday Calculator"; 
+  } else {
+    dateTab.classList.add("active");
+    ageTab.classList.remove("active");
+    endInput.style.display = "block";
+    startLabel.innerText = "Select Start Date & Time:";
+    calcBtn.innerText = "CALCULATE DIFFERENCE";
+    welcomeMsg.innerText = "Find gap between two dates";
+    // Change title for Date to Date Mode
+    mainTitle.innerText = "Date Difference Calculator";
+  }
+}
+
+
+function openModal() { document.getElementById("howToModal").style.display = "flex"; }
+function closeModal() { document.getElementById("howToModal").style.display = "none"; }
+
+window.onclick = function(event) {
+  let modal = document.getElementById("howToModal");
+  if (event.target == modal) { modal.style.display = "none"; }
+}
 
 function toggleMenu(){
   const menu = document.getElementById("mobileMenu");
@@ -215,53 +479,96 @@ function toggleMenu(){
   btn.innerHTML = menuOpen ? "✖" : "☰";
 }
 
-function start(){
+function startTimer(){
   clearInterval(timer);
-  calculate();
+  calculate(true); 
   timer = setInterval(calculate, 1000);
 }
 
-function calculate(){
+function calculate(isClick = false){
   const dobValue = document.getElementById("dob").value;
+  const endDateValue = document.getElementById("endDate").value;
   const result = document.getElementById("result");
-  if(!dobValue){ result.innerHTML = "Please select date & time"; return; }
 
-  const birthDate = new Date(dobValue);
-  const now = new Date();
-  if(now < birthDate){ result.innerHTML = "Invalid birth time"; return; }
+  if(!dobValue){ result.innerHTML = "Please select start date"; clearInterval(timer); return; }
 
-  let years = now.getFullYear() - birthDate.getFullYear();
-  let months = now.getMonth() - birthDate.getMonth();
-  let days = now.getDate() - birthDate.getDate();
+  const startDate = new Date(dobValue);
+  let endDate = (currentMode === 'age') ? new Date() : new Date(endDateValue);
+
+  if(!endDateValue && currentMode === 'date') { result.innerHTML = "Please select end date"; clearInterval(timer); return; }
+  if(endDate < startDate){ result.innerHTML = "Invalid date range"; clearInterval(timer); return; }
+
+  let years = endDate.getFullYear() - startDate.getFullYear();
+  let months = endDate.getMonth() - startDate.getMonth();
+  let days = endDate.getDate() - startDate.getDate();
 
   if (days < 0) {
     months--;
-    let lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+    let lastMonth = new Date(endDate.getFullYear(), endDate.getMonth(), 0);
     days += lastMonth.getDate();
   }
   if (months < 0) { years--; months += 12; }
 
-  let diff = now - birthDate;
+  let diff = endDate - startDate;
   let hrs = Math.floor((diff / (1000 * 60 * 60)) % 24);
   let mins = Math.floor((diff / (1000 * 60)) % 60);
   let secs = Math.floor((diff / 1000) % 60);
 
+  const yLabel = years === 1 ? "Year" : "Years";
+  const mLabel = months === 1 ? "Month" : "Months";
+  const dLabel = days === 1 ? "Day" : "Days";
+  const hLabel = hrs === 1 ? "Hour" : "Hours";
+  const minLabel = mins === 1 ? "Minute" : "Minutes";
+  const sLabel = secs === 1 ? "Second" : "Seconds";
+
+  let extraText = "";
+  if(currentMode === 'age') {
+    let currentYear = endDate.getFullYear();
+    let nextBday = new Date(currentYear, startDate.getMonth(), startDate.getDate());
+    let todayCheck = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
+    if (todayCheck > nextBday) { nextBday.setFullYear(currentYear + 1); }
+    let timeDiff = nextBday.getTime() - todayCheck.getTime();
+    let daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+    
+    let isToday = (endDate.getMonth() === startDate.getMonth() && endDate.getDate() === startDate.getDate());
+    if (isToday) {
+  extraText = `<div style="color:#25D366; font-weight:bold; margin-top:5px;">🎉 Happy Birthday!</div>`;
+  if (isClick) {
+    // Button ki live position nikalne ke liye
+    const btn = document.getElementById("calcBtn");
+    const rect = btn.getBoundingClientRect();
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+
+    confetti({ 
+      particleCount: 150, 
+      spread: 70, 
+      origin: { x: x, y: y }, // Button ki exact jagah se blast hoga
+      zIndex: 9999 
+    });
+  }
+}
+ else {
+      extraText = `<div style="color:#25D366; font-weight:bold; margin-top:5px;">Birthday In: ${daysLeft} ${daysLeft === 1 ? 'Day' : 'Days'}</div>`;
+    }
+  }
+
   result.innerHTML = `
-    <span style="color:#2193f3; font-size:18px;">⏳ Your Exact Age</span><br><br>
-    ${years} Years, ${months} Months, ${days} Days<br>
-    ${hrs} Hours, ${mins} Minutes, ${secs} Seconds
+    <span style="color:#2193f3; font-size:16px;">⏳ Result</span><br>
+    ${years} ${yLabel}, ${months} ${mLabel}, ${days} ${dLabel}<br>
+    ${hrs} ${hLabel}, ${mins} ${minLabel}, ${secs} ${sLabel}<br>
+    ${extraText}
   `;
 }
 
-// Updated Share Function with professional link and attractive text
 function shareWhatsApp() {
-  const cleanUrl = "https://nirojitnath.github.io/smart-age-calculator/";
-  const text = 
-    "✨ *Smart Age Calculator* ✨\n\n" +
-    "Apni exact age (Years, Months, Days aur Seconds) mein jaaniye sirf ek click mein! 🎂\n\n" +
-    "Check it out here: \n" + cleanUrl + "\n\n" +
-    "Created by *Nirojit Nath* 🚀";
-
+  const text = "❣️ *Smart Age Calculator* ❣️\n\n" +
+               "🔸 Calculate your exact age ⏳\n" +
+               "🔸 Check birthday countdown instantly 🎂\n" +
+               "🔸 Simple, fast & free to use — no signup needed ✅\n\n" +
+               "🔗 *Try it now:* \n" +
+               "👉 https://nirojitnath.github.io/smart-age-calculator/";
+               
   window.open("https://api.whatsapp.com/send?text=" + encodeURIComponent(text), "_blank");
 }
 
@@ -278,6 +585,72 @@ window.onload = () => {
     document.getElementById("themeIcon").innerHTML = "🌙";
   }
 };
+// Dynamic text loop logic
+const textArray = [
+  "Nirojit Editx 01",
+  "Exact Age Calculator",
+  "Date to Date Difference",
+  "Birthday Countdown",
+  "Live Age Calculate"
+];
+
+let textIdx = 0;
+const textEl = document.getElementById("dynamicText");
+
+function rotateText() {
+  textEl.classList.add("fade-out"); // Text ko dhundhla karein
+  setTimeout(() => {
+    textIdx = (textIdx + 1) % textArray.length;
+    textEl.innerText = textArray[textIdx];
+    textEl.classList.remove("fade-out"); // Naya text dikhayein
+  }, 500);
+}
+
+// Har 3 second mein badlega
+setInterval(rotateText, 3000);
+function animateProfile(element) {
+  if (element.classList.contains('coin-flip-anim')) return;
+
+  element.classList.add('coin-flip-anim');
+
+  // Ab 4000ms (4 seconds) baad class hategi
+  setTimeout(() => {
+    element.classList.remove('coin-flip-anim');
+  }, 3000);
+}
+// YouTube aur Instagram ke liye looping text
+const ytVariants = ["YouTube", "200k+ Subs"];
+const igVariants = ["Instagram", "80k+ Followers"];
+
+let ytIdx = 0;
+let igIdx = 0;
+
+function rotateSocialText() {
+  const ytEl = document.getElementById("ytText");
+  const igEl = document.getElementById("igText");
+
+  // Fade out effect
+  ytEl.classList.add("fade-out");
+  igEl.classList.add("fade-out");
+
+  setTimeout(() => {
+    // YouTube change karein
+    ytIdx = (ytIdx + 1) % ytVariants.length;
+    ytEl.innerText = ytVariants[ytIdx];
+
+    // Instagram change karein
+    igIdx = (igIdx + 1) % igVariants.length;
+    igEl.innerText = igVariants[igIdx];
+
+    // Fade in wapas
+    ytEl.classList.remove("fade-out");
+    igEl.classList.remove("fade-out");
+  }, 400); // 0.4s delay matching with CSS
+}
+
+// Har 2.5 second mein text badlega
+setInterval(rotateSocialText, 2500);
+
 </script>
 </body>
 </html>
