@@ -12,22 +12,22 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<link rel="icon" type="image/png" href="favicon.png">
-  
+<link rel="icon" href="favicon.png">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
 <style>
 *{ box-sizing:border-box; transition: background 0.3s, color 0.3s; }
 
-body{
-  margin:0;
-  font-family:Arial, sans-serif;
-  background:#eef1f7;
-  min-height:100vh;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #eef1f7;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Desktop par center karne ke liye */
+  justify-content: flex-start;
 }
 
 @keyframes stripMove{
@@ -99,7 +99,16 @@ body.dark .lang-subtitle { background: #333; color: #bbb; }
 }
 
 /* APP CARD */
-.app{ width:360px; background:#fff; border-radius:22px; box-shadow:0 18px 35px rgba(0,0,0,.25); overflow:hidden; }
+.app { 
+  width: 95%; 
+  max-width: 400px; /* Mobile par 95% aur Desktop par 400px fix */
+  background: #fff; 
+  border-radius: 22px; 
+  box-shadow: 0 18px 35px rgba(0,0,0,.25); 
+  overflow: hidden; 
+  margin: 20px 0;
+}
+
 .topbar{
   padding:18px; text-align:center; color:#fff;
   background:linear-gradient(90deg,#2193f3,#00e5ff,#7b2ff7,#2193f3);
@@ -134,7 +143,13 @@ button.main-btn{
 .system-notice { width: 340px; margin: 15px auto 5px; font-size: 11px; color: #777; text-align: center; line-height: 1.4; }
 
 /* SHARE ON WHATSAPP BUTTON */
-.share-container { width: 360px; text-align: center; margin-top: 10px; }
+.share-container { 
+  width: 95%; 
+  max-width: 400px; 
+  text-align: center; 
+  margin: 20px auto; 
+}
+
 .share-container p { font-size: 13px; font-weight: bold; color: #555; margin-bottom: 8px; }
 .whatsapp-btn {
   width: 95%; background: #25D366; color: white; border: none; padding: 12px; 
@@ -142,7 +157,13 @@ button.main-btn{
 }
 
 /* CREATOR & SOCIAL */
-.creator{ width:360px; text-align:center; margin:30px 0; }
+.creator { 
+  width: 95%; 
+  max-width: 400px; 
+  text-align: center; 
+  margin: 20px auto; 
+}
+
 .dp-box{
   width:90px; height:90px; margin:0 auto 10px; border-radius:50%; display:flex; align-items:center; justify-content:center;
   background:linear-gradient(45deg,#00f2fe,#7b2ff7,#ff0080);
@@ -170,11 +191,17 @@ button.main-btn{
 .ig{ background: linear-gradient(45deg, #f58529, #dd2a7b, #8134af); }
 
 /* FOOTER SECTION */
-.footer{
-  width:100%; padding:20px; text-align:center; color:#fff;
-  background:linear-gradient(90deg,#ff004c,#ff9f00,#8e2de2,#ff004c);
-  background-size:600% 600%; animation:stripMove 4s ease infinite;
+.footer {
+  width: 100%; 
+  padding: 20px; 
+  text-align: center; 
+  color: #fff;
+  margin-top: auto; /* Yeh line niche ki kaali space khatam kar degi */
+  background: linear-gradient(90deg,#ff004c,#ff9f00,#8e2de2,#ff004c);
+  background-size: 600% 600%; 
+  animation: stripMove 4s ease infinite;
 }
+
 .footer-desc { font-size:13px; margin:5px auto; max-width:600px; opacity:0.9; line-height:1.7; }
 .footer a { color:#fff; text-decoration:none; font-weight:bold; margin:0 5px; }
 
