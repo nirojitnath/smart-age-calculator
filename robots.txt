@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://nirojitnath.github.io/smart-age-calculator/sitemap.txt
+Sitemap: https://nirojitnath.github.io/smart-age-calculator/sitemap.xml
